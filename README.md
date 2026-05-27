@@ -4,6 +4,10 @@ Imports bank transaction exports (XLSX) into YNAB via the API.
 
 Reads `Transaction*.xlsx` files from `~/Downloads`, transforms them into YNAB transactions, uploads in batches, and deletes the source files on success.
 
+## Repo boundary
+
+This repo owns downloaded bank/card statement imports and the `~/Downloads` launchd watcher. `/Users/aamin/dev/projects/ynab-tools` owns YNAB reporting/export utilities only. Do not add bank-import watchers or upload logic there.
+
 ## Supported file formats
 
 | Format | Detection | Columns |
@@ -45,7 +49,10 @@ Map the last digits of each card/account number to its YNAB account UUID:
 ```
 YNAB_ACCOUNT_2887=uuid-for-your-card
 YNAB_ACCOUNT_02=uuid-for-your-bank-account
+YNAB_ACCOUNT_03=uuid-for-saver-plus
 ```
+
+Current local mapping includes Saver Plus account `097XXXXXXXX03` as `YNAB_ACCOUNT_03`.
 
 ## Usage
 
